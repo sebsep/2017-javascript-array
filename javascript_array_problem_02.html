@@ -1,27 +1,58 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <script type="text/javascript">
-        function check_string() {
-          // TODO : 여기에 여러분이 직접 코딩을 해주세요.          
-          return true;
-        }
-
-        expect(check_string('(())())'), false);
-        expect(check_string('(((()())()'), false);
-        expect(check_string('(()())((()))'), true);
-        expect(check_string('((()()(()))(((())))()'), false);
-        expect(check_string('()()()()(()()())()'), true);
-        expect(check_string('(()((())()('), false);
-
-        function expect(l, r) {
-            if (l === r)
-                console.log('pass');
-            else
-                console.log('fail');
-        }
-    </script>
-</head>
-<body>
-</body>
-</html>
+﻿ <!DOCTYPE html> 
+ <html> 
+ <head> 
+     <script type="text/javascript">  
+         function check_string() { 
+  
+           var parenthesesStack = new Array; 
+  
+           for(var i=0; i<arguments[0].length; i++){ 
+             var parentheses = arguments[0].charAt(i); 
+             //console.log("parentheses : " + parentheses); 
+             switch(parentheses){ 
+               case '(' : parenthesesStack.push(parentheses);  /*console.log("leftParentheses : " + parentheses);*/ break; 
+               case ')' : 
+                 if(parenthesesStack[0] == undefined){ 
+                   return false; 
+                 } 
+                 else{ 
+                   var leftParentheses = parenthesesStack.pop(); 
+                   //console.log("leftParenthesesPop : " + leftParentheses); 
+                   if( (leftParentheses == ')') && (parentheses != '(') ){ 
+                     return false; 
+                   } 
+                   else{ 
+                     break; 
+                   } 
+                 } 
+             } 
+           } 
+           //console.log(parenthesesStack[0]); 
+           if((parenthesesStack[0] == undefined)){ 
+             return true; 
+           } 
+           else{ 
+             return false; 
+           } 
+         } 
+  
+  
+         expect(check_string('(())())'), false); 
+         expect(check_string('(((()())()'), false); 
+         expect(check_string('(()())((()))'), true); 
+         expect(check_string('((()()(()))(((())))()'), false); 
+         expect(check_string('()()()()(()()())()'), true); 
+         expect(check_string('(()((())()('), false); 
+  
+  
+         function expect(l, r) { 
+             if (l === r) 
+                 console.log('pass'); 
+             else 
+                 console.log('fail'); 
+         } 
+     </script> 
+ </head> 
+ <body> 
+ </body> 
+ </html> 
